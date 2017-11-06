@@ -7,4 +7,4 @@ RUN	apt update \
 	&& rm -rf /var/lib/apt/lists/* /tmp/*
 
 RUN	pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --upgrade pip \
-	&& pip install -i https://pypi.tuna.tsinghua.edu.cn/simple qiime 
+	&& pip install -i https://pypi.tuna.tsinghua.edu.cn/simple numpy scipy qiime 
