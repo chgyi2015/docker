@@ -1,0 +1,4 @@
+git remote add origin git@code.aliyun.com:yichungen/bio-docker.git
+git add .
+git commit
+git push -u origin master
