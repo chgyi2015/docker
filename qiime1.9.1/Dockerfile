@@ -9,4 +9,4 @@ RUN	apt update \
 RUN	pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --upgrade pip
 
 RUN	pip install -i https://pypi.tuna.tsinghua.edu.cn/simple numpy scipy
-RUN	pip install -i https://pypi.tuna.tsinghua.edu.cn/simple qiime
+RUN	pip install qiime
