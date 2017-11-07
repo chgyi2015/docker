@@ -1,7 +1,7 @@
 FROM	ubuntu:16.04
 COPY 	sources.list /etc/apt/
 RUN	apt update \
-	&& apt install -y python python-pip \
+	&& apt install -y python python-pip python-tk\
 	&& apt autoremove \
 	&& apt clean \
 	&& rm -rf /var/lib/apt/lists/* /tmp/*
