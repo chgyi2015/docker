@@ -26,7 +26,7 @@ RUN	pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple jupyter
 RUN	pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --upgrade pip 
 COPY	docker-entrypoint.sh /usr/local/bin/
 RUN	su - -c \	
-		"R -e \"install.packages('devtools', repos='https://cran.rstudio.com/');library(devtools);devtools::install_github(c('IRkernel/IRdisplay','IRkernel/IRkernel'));IRkernel::installspec();source('http://www.bioconductor.org/biocLite.R');biocLite(c('ballgown','pheatmap','ggplot2','clusterProfiler','limma','reshape2','clusterProfiler','oligo'))\""
+		"R -e \"install.packages('devtools', repos='https://cran.rstudio.com/');library(devtools);devtools::install_github(c('IRkernel/IRdisplay','IRkernel/IRkernel'));IRkernel::installspec();source('http://www.bioconductor.org/biocLite.R');biocLite(c('ballgown','pheatmap','ggplot2','clusterProfiler','limma','reshape2','clusterProfiler','oligo','org.Hs.eg.db'))\""
 
 RUN	chmod +x /usr/local/bin/docker-entrypoint.sh
 ENTRYPOINT	docker-entrypoint.sh
