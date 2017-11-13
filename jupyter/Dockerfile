@@ -22,7 +22,7 @@ RUN	apt update && \
 	&& rm -rf /var/lib/apt/lists/* /tmp/* 
 
 RUN	pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --upgrade pip
-RUN	pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple jupyter
+RUN	pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple jupyter numpy scipy pandas matplotlib
 RUN	pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --upgrade pip 
 COPY	docker-entrypoint.sh /usr/local/bin/
 RUN	su - -c \	
