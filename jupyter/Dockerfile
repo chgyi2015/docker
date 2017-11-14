@@ -22,7 +22,7 @@ RUN	apt update && \
 	&& rm -rf /var/lib/apt/lists/* /tmp/* 
 
 RUN	pip3 install --upgrade pip
-RUN	pip3 install jupyter numpy scipy pandas matplotlib,bs4
+RUN	pip3 install jupyter numpy scipy pandas matplotlib bs4
 RUN	pip install --upgrade pip 
 COPY	docker-entrypoint.sh /usr/local/bin/
 RUN	su - -c \	
