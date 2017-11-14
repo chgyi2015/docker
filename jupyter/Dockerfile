@@ -1,5 +1,5 @@
 FROM	ubuntu:16.04
-COPY	sources.list /etc/apt/
+RUN	echo 'deb http://cran.rstudio.com/bin/linux/ubuntu xenial/' >>/etc/apt/sources.list
 RUN     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
 RUN	apt update && \
 	apt -y install python \
@@ -25,8 +25,9 @@ RUN	pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --upgrade pip
 RUN	pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple jupyter numpy scipy pandas matplotlib
 RUN	pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --upgrade pip 
 COPY	docker-entrypoint.sh /usr/local/bin/
-RUN	su - -c \	
-		"R -e \"install.packages('devtools', repos='https://cran.rstudio.com/');library(devtools);devtools::install_github(c('IRkernel/IRdisplay','IRkernel/IRkernel'));IRkernel::installspec();source('http://www.bioconductor.org/biocLite.R');biocLite(c('ballgown','pheatmap','ggplot2','clusterProfiler','limma','reshape2','clusterProfiler','oligo','org.Hs.eg.db','psych'))\""
+COPY	install.r /tmp/
+RUN	R -f /tmp/install.r
+RUN	rm -rf /tmp/*
 
 RUN	chmod +x /usr/local/bin/docker-entrypoint.sh
 ENTRYPOINT	docker-entrypoint.sh
