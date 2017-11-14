@@ -12,8 +12,8 @@ pkgs <- c("biocViews", "ProtGenerics", "mzR", "MSnbase", "msdata",
           "zlibbioc",'ballgown','pheatmap','ggplot2','clusterProfiler',
           "reshape2",'oligo','org.Hs.eg.db','org.Mm.eg.db','org.Rn.eg.db',
           'limma','edgeR','DEGseq','SCDE','BPSC','DESeq','baySeq','NBPSeq',
-          'GSPM','SAMseq','pysch')
+          'GSPM','SAMseq','pysch','AnnotationDbi')
 pkgs <- packages_all[packages_all %in% pkgs]
 biocLite(pkgs)
-
+biocLite('org.Hs.eg.db','org.Mm.eg.db','org.Rn.eg.db')
 
