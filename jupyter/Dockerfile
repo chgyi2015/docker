@@ -26,7 +26,7 @@ RUN	pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple jupyter numpy scipy
 RUN	pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --upgrade pip 
 COPY	docker-entrypoint.sh /usr/local/bin/
 COPY	install.r /home/
-RUN	R -f /home/install.r
+RUN	/usr/bin/R -f /home/install.r
 RUN	rm -rf /tmp/* /home/*
 
 RUN	chmod +x /usr/local/bin/docker-entrypoint.sh
