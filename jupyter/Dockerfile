@@ -30,4 +30,4 @@ RUN	su - -c \
 RUN	chmod +x /usr/local/bin/docker-entrypoint.sh
 ENTRYPOINT	docker-entrypoint.sh
 CMD	['']
-EXPOSE 8888
+EXPOSE 8888,22
