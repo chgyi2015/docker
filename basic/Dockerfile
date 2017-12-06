@@ -28,18 +28,16 @@ RUN	apt update && \
 		       python-tk  \
 		       python-h5py   \
                        libghc-zlib-dev \
-                       bzip2 \		       
+                       bzip2 \	
+                       r-base-core \	       
 	&& apt autoremove \
 	&& apt clean \
 	&& rm -rf /var/lib/apt/lists/* /tmp/* 
 
 RUN	pip3 install --upgrade pip
-RUN	pip3 install jupyter numpy scipy pandas matplotlib bs4 rpy2 
-RUN	pip install --upgrade pip  && pip install scipy numpy qiime 
+RUN	pip3 install jupyter numpy scipy pandas matplotlib bs4 
+RUN	pip install --upgrade pip  && pip install scipy numpy qiime HTseq
 COPY	docker-entrypoint.sh /usr/local/bin/
-COPY	install.r /tmp/
-RUN	R -f /tmp/install.r
-RUN	rm -rf /tmp/*
 RUN	chmod +x /usr/local/bin/docker-entrypoint.sh
 
 ##install R3.4.2  ###
@@ -61,6 +59,11 @@ WORKDIR	/app
 RUN	wget -c ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/downloads/hisat2-2.1.0-Linux_x86_64.zip && unzip hisat2-2.1.0-Linux_x86_64.zip  && \
         rm -rf hisat2-2.1.0-Linux_x86_64.zip && 
 ENV	PATH /app/hisat2-2.1.0:$PATH
+
+#install strinttie####
+
+
+
 
 #add miranda soft #
 RUN	wget http://cbio.mskcc.org/microrna_data/miRanda-aug2010.tar.gz; \
