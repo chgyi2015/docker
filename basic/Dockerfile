@@ -1,14 +1,15 @@
 FROM	ubuntu:16.04
+RUN	rm /etc/apt/sources.list
+COPY	sources.list /etc/apt/sources.list
 ENV	LANG C.UTF-8
 RUN	echo 'deb http://cran.rstudio.com/bin/linux/ubuntu xenial/' >>/etc/apt/sources.list
 RUN     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
 RUN	apt update && \
 	apt -y install python \
-		       python3 \
+		       ipython3 \
 		       python3-pip \
                        python-pip \
-	               apt-transport-https\
-                       r-base-core \
+	               apt-transport-https \
 		       openssl \
                        wget \
                        curl \
@@ -28,7 +29,6 @@ RUN	apt update && \
 		       make \
 		       python-tk  \
 		       python-h5py   \
-	               c++ \
                        libghc-zlib-dev \
                        bzip2 \		       
 	&& apt autoremove \
@@ -56,7 +56,7 @@ WORKDIR	/app/
 RUN	curl -sL http://cole-trapnell-lab.github.io/cufflinks/assets/downloads/cufflinks-2.2.1.Linux_x86_64.tar.gz | tar -zxC ./
 ENV	PATH /app/cufflinks-2.2.1.Linux_x86_64
 ####install GATK####
-RUN         cp /app/GenomeAnalysisTK.jar  /bin/
+RUN         cp ./  /bin/
 
 #install hisat2 ####
 WORKDIR	/app
@@ -74,7 +74,7 @@ RUN	wget http://cbio.mskcc.org/microrna_data/miRanda-aug2010.tar.gz; \
 ENV	PATH	/app/miRanda/src/:$PATH
 
 #tophat3##############	
-RUN	wget https://github.com/trinityrnaseq/trinityrnaseq/archive/Trinity-v2.5.1.tar.gz && tar -zxvf Trinity-v2.5.1.tar.gz && rm -rf Trinity-v2.5.1.tar.gz
+RUN	curl -sL  https://github.com/trinityrnaseq/trinityrnaseq/archive/Trinity-v2.5.1.tar.gz && tar -zxvf Trinity-v2.5.1.tar.gz | tar -zxC ./
 WORKDIR	/app/trinityrnaseq-Trinity-v2.5.1
 RUN	make
 CMD	docker-entrypoint.sh
