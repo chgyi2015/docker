@@ -1,6 +1,4 @@
 FROM	ubuntu:16.04
-RUN	rm /etc/apt/sources.list
-COPY	sources.list /etc/apt/sources.list
 ENV	LANG C.UTF-8
 RUN	echo 'deb http://cran.rstudio.com/bin/linux/ubuntu xenial/' >>/etc/apt/sources.list
 RUN     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
@@ -56,7 +54,8 @@ WORKDIR	/app/
 RUN	curl -sL http://cole-trapnell-lab.github.io/cufflinks/assets/downloads/cufflinks-2.2.1.Linux_x86_64.tar.gz | tar -zxC ./
 ENV	PATH /app/cufflinks-2.2.1.Linux_x86_64
 ####install GATK####
-RUN         cp ./  /bin/
+  GenomeAnalysisTK.-3.8-0.tar.bz2
+RUN	curl -sL https://software.broadinstitute.org/gatk/download/auth?package=GATK | tar -jxC ./  && mv GenomeAnalysisTK-* GATK/
 
 #install hisat2 ####
 WORKDIR	/app
