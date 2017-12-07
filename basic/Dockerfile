@@ -32,11 +32,12 @@ RUN	apt update && \
                        libghc-zlib-dev \
                        bzip2 	
 RUN	apt update && apt install r-base-core
+
+RUN	pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --upgrade pip  && pip install -i https://pypi.tuna.tsinghua.edu.cn/simple numpy scipy HTseq matplotlib
+RUN	pip install -i https://pypi.tuna.tsinghua.edu.cn/simple qiime
+
 RUN	pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --upgrade pip
 RUN	pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple jupyter numpy scipy pandas matplotlib bs4 
-RUN	pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --upgrade pip  && pip install -i https://pypi.tuna.tsinghua.edu.cn/simple scipy numpy HTseq matplotlib
-RUN	rm /etc/apt/sources.list
-RUN	pip install -i https://pypi.tuna.tsinghua.edu.cn/simple qiime
 COPY	docker-entrypoint.sh /usr/local/bin/
 RUN	chmod +x /usr/local/bin/docker-entrypoint.sh
 
