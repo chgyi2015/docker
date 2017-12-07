@@ -30,7 +30,7 @@ RUN	apt update && \
 		       python-tk  \
 		       python-h5py   \
                        libghc-zlib-dev \
-                       bzip2 \	
+                       bzip2 	
 RUN	apt update && apt install r-base-core
 RUN	pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --upgrade pip
 RUN	pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple jupyter numpy scipy pandas matplotlib bs4 
