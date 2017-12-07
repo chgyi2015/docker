@@ -27,14 +27,14 @@ RUN	apt update && \
                        libghc-zlib-dev \
                        bzip2	
 RUN	apt update && apt -y install r-base-core
-RUN	apt update && apt -y install python python-pip && pip install --upgrade pip 
+RUN	apt update && apt -y install python-pip ipython && pip install --upgrade pip 
 #install scipy numpy pandas matplotlib  #####
 RUN	pip install scipy numpy pandas matplotlib
 #install qiime 
 RUN	pip install qiime
 
 #install jupyter and basic module
-RUN	apt update && apt -y install python3 python3-pip && pip3 install --upgrade pip
+RUN	apt update && apt -y install python3 python3-pip  && pip3 install --upgrade pip
 RUN	pip3 install jupyter numpy scipy pandas matplotlib bs4 
 COPY	docker-entrypoint.sh /usr/local/bin/
 RUN	chmod +x /usr/local/bin/docker-entrypoint.sh
@@ -71,7 +71,7 @@ RUN	wget http://cbio.mskcc.org/microrna_data/miRanda-aug2010.tar.gz; \
         rm -rf miRanda-aug2010.tar.gz ;\
         cd miRanda-3.3a; \
         ./configure; \
-        make; \
+        make; 
 ENV	PATH	/app/miRanda/src/:$PATH
 
 #tophat3##############	
