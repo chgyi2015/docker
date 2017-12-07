@@ -1,5 +1,7 @@
 FROM	ubuntu:16.04
 ENV	LANG C.UTF-8
+RUN	rm /etc/apt/sources.list
+COPY	sources.list /etc/apt/
 RUN	echo 'deb http://cran.rstudio.com/bin/linux/ubuntu xenial/' >>/etc/apt/sources.list
 RUN     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
 RUN	apt update && \
@@ -29,15 +31,13 @@ RUN	apt update && \
 		       python-h5py   \
                        libghc-zlib-dev \
                        bzip2 \	
-                       r-base-core \	       
-	&& apt autoremove \
-	&& apt clean \
-	&& rm -rf /var/lib/apt/lists/* /tmp/* 
+                       r-base-core 
 
-RUN	pip3 install --upgrade pip
-RUN	pip3 install jupyter numpy scipy pandas matplotlib bs4 
-RUN	pip install --upgrade pip  && pip install scipy numpy HTseq
-RUN	pip install qiime
+RUN	pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --upgrade pip
+RUN	pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple jupyter numpy scipy pandas matplotlib bs4 
+RUN	pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --upgrade pip  && pip install -i https://pypi.tuna.tsinghua.edu.cn/simple scipy numpy HTseq matplotlib
+RUN	rm /etc/apt/sources.list
+RUN	pip install -i https://pypi.tuna.tsinghua.edu.cn/simple qiime
 COPY	docker-entrypoint.sh /usr/local/bin/
 RUN	chmod +x /usr/local/bin/docker-entrypoint.sh
 
