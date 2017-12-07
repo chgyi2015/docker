@@ -2,7 +2,7 @@ FROM	ubuntu:16.04
 ENV	LANG C.UTF-8
 RUN	rm /etc/apt/sources.list
 COPY	sources.list /etc/apt/
-RUN	echo 'deb https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/linux/ubuntu xenial/' >>/etc/apt/sources.list
+RUN	echo 'deb http://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/linux/ubuntu xenial/' >>/etc/apt/sources.list
 RUN     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
 RUN	apt update && \
 	apt -y install python \
