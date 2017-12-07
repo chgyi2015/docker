@@ -4,9 +4,6 @@ RUN	echo 'deb http://cran.rstudio.com/bin/linux/ubuntu xenial/' >>/etc/apt/sourc
 RUN     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
 RUN	apt update && \
 	apt -y install python \
-		       ipython3 \
-		       python3-pip \
-                       python-pip \
 	               apt-transport-https \
 		       openssl \
                        wget \
@@ -30,15 +27,14 @@ RUN	apt update && \
                        libghc-zlib-dev \
                        bzip2	
 RUN	apt update && apt -y install r-base-core
-RUN	pip install --upgrade pip 
-
+RUN	apt update && apt -y install python python-pip && pip install --upgrade pip 
 #install scipy numpy pandas matplotlib  #####
 RUN	pip install scipy numpy pandas matplotlib
 #install qiime 
 RUN	pip install qiime
 
 #install jupyter and basic module
-RUN	pip3 install --upgrade pip
+RUN	apt update && apt -y install python3 python3-pip && pip3 install --upgrade pip
 RUN	pip3 install jupyter numpy scipy pandas matplotlib bs4 
 COPY	docker-entrypoint.sh /usr/local/bin/
 RUN	chmod +x /usr/local/bin/docker-entrypoint.sh
