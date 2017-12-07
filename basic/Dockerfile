@@ -44,7 +44,7 @@ RUN	su - -c \
 
 
 #install qiime #####
-RUN	pip install scipy numpy pandas mtplotlib
+RUN	pip install scipy numpy pandas matplotlib
 RUN	pip install qiime
 
 #install HTseq##
