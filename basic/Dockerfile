@@ -31,8 +31,14 @@ RUN	apt update && \
                        bzip2	
 RUN	apt update && apt -y install r-base-core
 RUN	pip install --upgrade pip 
-RUN	pip3 install --upgrade pip
+
+#install scipy numpy pandas matplotlib  #####
+RUN	pip install scipy numpy pandas matplotlib
+#install qiime 
+RUN	pip install qiime
+
 #install jupyter and basic module
+RUN	pip3 install --upgrade pip
 RUN	pip3 install jupyter numpy scipy pandas matplotlib bs4 
 COPY	docker-entrypoint.sh /usr/local/bin/
 RUN	chmod +x /usr/local/bin/docker-entrypoint.sh
@@ -42,14 +48,8 @@ CMD	docker-entrypoint.sh
 RUN	su - -c \	
 		"R -e \"install.packages('devtools', repos='https://cran.rstudio.com/');library(devtools);devtools::install_github(c('IRkernel/IRdisplay','IRkernel/IRkernel'));IRkernel::installspec();source('http://www.bioconductor.org/biocLite.R');biocLite(c('ballgown','pheatmap','ggplot2','clusterProfiler','limma','reshape2','clusterProfiler','oligo','org.Hs.eg.db','psych','DESeq','baySeq','DEGseq','DESeq2','edgeR','SAMseq','readr','readxl','optparse','AnnotationHub','topGO'))\""
 
-
-#install qiime #####
-RUN	pip install scipy numpy pandas matplotlib
-RUN	pip install qiime
-
 #install HTseq##
 RUN	pip install HTseq
-
 
 #install cufflinks####
 RUN	mkdir /app
