@@ -1,8 +1,6 @@
 FROM	ubuntu:16.04
 ENV	LANG C.UTF-8
-RUN	rm /etc/apt/sources.list
-COPY	sources.list /etc/apt/
-RUN	echo 'deb http://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/linux/ubuntu xenial/' >>/etc/apt/sources.list
+RUN	echo 'deb http://cran.rstudio.com/bin/linux/ubuntu xenial/' >>/etc/apt/sources.list
 RUN     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
 RUN	apt update && \
 	apt -y install python \
@@ -30,21 +28,27 @@ RUN	apt update && \
 		       python-tk  \
 		       python-h5py   \
                        libghc-zlib-dev \
-                       bzip2 	
-RUN	apt update && apt install r-base-core
-
-RUN	pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --upgrade pip  && pip install -i https://pypi.tuna.tsinghua.edu.cn/simple numpy scipy HTseq matplotlib
-RUN	pip install -i https://pypi.tuna.tsinghua.edu.cn/simple qiime
-
-RUN	pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --upgrade pip
-RUN	pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple jupyter numpy scipy pandas matplotlib bs4 
+                       bzip2	
+RUN	apt update && apt -y install r-base-core
+RUN	pip install --upgrade pip 
+RUN	pip3 install --upgrade pip
+#install jupyter and basic module
+RUN	pip3 install jupyter numpy scipy pandas matplotlib bs4 
 COPY	docker-entrypoint.sh /usr/local/bin/
 RUN	chmod +x /usr/local/bin/docker-entrypoint.sh
+CMD	docker-entrypoint.sh
 
 ##install R3.4.2  ###
 RUN	su - -c \	
 		"R -e \"install.packages('devtools', repos='https://cran.rstudio.com/');library(devtools);devtools::install_github(c('IRkernel/IRdisplay','IRkernel/IRkernel'));IRkernel::installspec();source('http://www.bioconductor.org/biocLite.R');biocLite(c('ballgown','pheatmap','ggplot2','clusterProfiler','limma','reshape2','clusterProfiler','oligo','org.Hs.eg.db','psych','DESeq','baySeq','DEGseq','DESeq2','edgeR','SAMseq','readr','readxl','optparse','AnnotationHub','topGO'))\""
 
+
+#install qiime #####
+RUN	pip install scipy numpy pandas mtplotlib
+RUN	pip install qiime
+
+#install HTseq##
+RUN	pip install HTseq
 
 
 #install cufflinks####
@@ -78,4 +82,3 @@ ENV	PATH	/app/miRanda/src/:$PATH
 RUN	curl -sL  https://github.com/trinityrnaseq/trinityrnaseq/archive/Trinity-v2.5.1.tar.gz && tar -zxvf Trinity-v2.5.1.tar.gz | tar -zxC ./
 WORKDIR	/app/trinityrnaseq-Trinity-v2.5.1
 RUN	make
-CMD	docker-entrypoint.sh
