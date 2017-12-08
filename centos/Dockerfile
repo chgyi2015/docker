@@ -4,7 +4,7 @@ COPY    docker-entrypoint.sh /usr/local/bin/
 RUN	yum update ;\
 	yum -y install epel-release ;\
 	yum update; \
-	yum -y install make libpng-devel freetype-devel python-pip python34-pip gcc gcc-gfortran gcc-c++ readline-devel;\
+	yum -y install perl make libpng-devel freetype-devel python-pip python34-pip gcc gcc-gfortran gcc-c++ readline-devel;\
 	yum -y install  libXt-devel bzip2 bzip2-devel bzip2-libs xz-devel.x86_64 zlib-devel zlib-libs pcre-devel libcurl-devel;\
 	pip install --upgrade pip ;\
 	pip install numpy HTseq; \
@@ -18,7 +18,7 @@ CMD     docker-entrypoint.sh
 
 ##install R3.4.2  ###
 RUN     su - -c \
-                "R -e \"install.packages('devtools', repos='https://cran.rstudio.com/');library(devtools);devtools::install_github(c('IRkernel/IRdisplay','IRkernel/IRkernel'));IRkernel::installspec();source('http://www.bioconductor.org/biocLite.R');biocLite(c('ballgown','pheatmap','ggplot2','clusterProfiler','limma','reshape2','clusterProfiler','oligo','org.Hs.eg.db','psych','DESeq','baySeq','DEGseq','DESeq2','edgeR','SAMseq','readr','readxl','optparse','AnnotationHub','topGO'))\""
+                "/app/R-3.4.3/bin/R -e \"install.packages('devtools', repos='https://cran.rstudio.com/');library(devtools);devtools::install_github(c('IRkernel/IRdisplay','IRkernel/IRkernel'));IRkernel::installspec();source('http://www.bioconductor.org/biocLite.R');biocLite(c('ballgown','pheatmap','ggplot2','clusterProfiler','limma','reshape2','clusterProfiler','oligo','org.Hs.eg.db','psych','DESeq','baySeq','DEGseq','DESeq2','edgeR','SAMseq','readr','readxl','optparse','AnnotationHub','topGO'))\""
 
 #install cufflinks####
 WORKDIR /app/
@@ -46,4 +46,6 @@ RUN     curl -sL http://cole-trapnell-lab.github.io/cufflinks/assets/downloads/c
         cd /app/trinityrnaseq-Trinity-v2.5.1; \
         make;\
         echo 'export PATH="/app/trinityrnaseq-Trinity-v2.5.1:$PATH"' >> /etc/profile ;\
-
+        echo 'export PATH="/app/R-3.4.3/bin:$PATH" >> /etc/profile ;\
+        source /etc/profile ;\
+	yum autoremove 
