@@ -51,7 +51,7 @@ RUN	pip install HTseq
 RUN	mkdir /app
 WORKDIR	/app/
 RUN	curl -sL http://cole-trapnell-lab.github.io/cufflinks/assets/downloads/cufflinks-2.2.1.Linux_x86_64.tar.gz | tar -zxC ./; \
-	curl -sL https://software.broadinstitute.org/gatk/download/auth?package=GATK | tar -jxC ./; mv Genome* GATK
+	curl -sL https://software.broadinstitute.org/gatk/download/auth?package=GATK | tar -jxC ./
 ENV	PATH /app/cufflinks-2.2.1.Linux_x86_64:$PATH
 #install hisat2 ####
 WORKDIR	/app
