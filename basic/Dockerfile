@@ -8,7 +8,7 @@ RUN	apt update && apt -y install python python-tk python-pip ipython \
 	&& pip install --upgrade pip;\ 
 	pip install numpy==1.7.1 ; \
 	pip install matplotlib==1.3.1 ; \
-        pip install scipy==0.17.1 ;\
+        pip install scipy==0.11.0 ;\
 	pip install h5py ;\
 	pip install qiime 
 
