@@ -53,7 +53,7 @@ WORKDIR	/app/
 RUN	curl -sL http://cole-trapnell-lab.github.io/cufflinks/assets/downloads/cufflinks-2.2.1.Linux_x86_64.tar.gz | tar -zxC ./
 ENV	PATH /app/cufflinks-2.2.1.Linux_x86_64
 ####install GATK####
-RUN	curl -sL https://software.broadinstitute.org/gatk/download/auth?package=GATK | tar -jxC ./  && mv GenomeAnalysisTK-* GATK/
+RUN	curl -sL https://software.broadinstitute.org/gatk/download/auth?package=GATK | tar -jxC ./  && mv Genome* GATK
 
 #install hisat2 ####
 WORKDIR	/app
