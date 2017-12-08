@@ -6,7 +6,7 @@ RUN     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65
 RUN	apt update && apt -y install python python-tk python-h5py python-pip ipython \
 	&& pip install --upgrade pip 
 #install scipy numpy pandas matplotlib  #####
-RUN	pip install scipy numpy pandas matplotlib
+RUN	pip install scipy numpy==1.7.1 pandas matplotlib==1.3.1
 #install qiime 
 
 RUN	pip install qiime
@@ -60,8 +60,9 @@ RUN	wget -c ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/downloads/hisat2-2.1.0-Lin
 ENV	PATH /app/hisat2-2.1.0:$PATH
 
 #install strinttie####
-RUN	curl -sL http://ccb.jhu.edu/software/stringtie/dl/stringtie-1.3.3b.Linux_x86_64.tar.gz | tar -zxC ./
-ENV	PATH /app/stringtie-1.3.3b.Linux_x86_64:$PATH
+RUN	curl -sL http://ccb.jhu.edu/software/stringtie/dl/stringtie-1.3.3b.Linux_x86_64.tar.gz | tar -zxC ./ ;\
+	echo 'export PATH="/app/stringtie-1.3.b.Linux_x86_64:$PATH" '>> /etc/profile ;\
+	source /etc/profile
 
 #add miranda soft #
 RUN	wget http://cbio.mskcc.org/microrna_data/miRanda-aug2010.tar.gz; \
@@ -70,9 +71,12 @@ RUN	wget http://cbio.mskcc.org/microrna_data/miRanda-aug2010.tar.gz; \
         cd miRanda-3.3a; \
         ./configure; \
         make; 
-ENV	PATH	/app/miRanda/src/:$PATH
+	echo 'export PATH="/app/miRanda-3.3a" >> /etc/profile' ;\
+	source /etc/profile
 
 #tophat3##############	
 RUN	curl -sL  https://github.com/trinityrnaseq/trinityrnaseq/archive/Trinity-v2.5.1.tar.gz | tar -zxC ./;\
         cd /app/trinityrnaseq-Trinity-v2.5.1; \
-        make 
+        make;\
+	echo 'export PATH="/app/trinityrnaseq-Trinity-v2.5.1:$PATH"' >> /etc/profile ;\
+	source /etc/profile
