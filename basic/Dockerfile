@@ -6,9 +6,8 @@ RUN     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65
 RUN	apt update && apt -y install python python-tk python-h5py python-pip ipython \
 	&& pip install --upgrade pip 
 #install scipy numpy pandas matplotlib  #####
-RUN	pip install scipy numpy==1.7.1 pandas matplotlib==1.3.1
+RUN	pip install scipy==0.8 PyCogent==1.5.3 numpy==1.7.1 pandas matplotlib==1.3.1
 #install qiime 
-
 RUN	pip install qiime
 RUN	apt update && \
 	apt -y install apt-transport-https \
@@ -70,7 +69,7 @@ RUN	wget http://cbio.mskcc.org/microrna_data/miRanda-aug2010.tar.gz; \
         rm -rf miRanda-aug2010.tar.gz ;\
         cd miRanda-3.3a; \
         ./configure; \
-        make; 
+        make;\ 
 	echo 'export PATH="/app/miRanda-3.3a" >> /etc/profile' ;\
 	source /etc/profile
 
