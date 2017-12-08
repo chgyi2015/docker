@@ -73,6 +73,6 @@ RUN	wget http://cbio.mskcc.org/microrna_data/miRanda-aug2010.tar.gz; \
 ENV	PATH	/app/miRanda/src/:$PATH
 
 #tophat3##############	
-RUN	curl -sL  https://github.com/trinityrnaseq/trinityrnaseq/archive/Trinity-v2.5.1.tar.gz && tar -zxvf Trinity-v2.5.1.tar.gz | tar -zxC ./
-WORKDIR	/app/trinityrnaseq-Trinity-v2.5.1
-RUN	make
+RUN	curl -sL  https://github.com/trinityrnaseq/trinityrnaseq/archive/Trinity-v2.5.1.tar.gz | tar -zxC ./;\
+        cd /app/trinityrnaseq-Trinity-v2.5.1; \
+        make 
