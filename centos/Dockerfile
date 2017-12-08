@@ -30,7 +30,7 @@ RUN     curl -sL http://cole-trapnell-lab.github.io/cufflinks/assets/downloads/c
         cp -R /app/hisat2-2.1.0/hisat2* /app/bin/  ;\
         #install strinttie####
         curl -sL http://ccb.jhu.edu/software/stringtie/dl/stringtie-1.3.3b.Linux_x86_64.tar.gz | tar -zxC ./ ;\
-        cp /app/stringtie-1.3.b.Linux_x86_64/stringtie /app/bin/
+        cp /app/stringtie-1.3.b.Linux_x86_64/stringtie /app/bin/ ;\
         #add miranda soft #
 	wget http://cbio.mskcc.org/microrna_data/miRanda-aug2010.tar.gz; \
         tar -zxvf miRanda-aug2010.tar.gz; \
