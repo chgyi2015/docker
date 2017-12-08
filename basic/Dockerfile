@@ -6,7 +6,7 @@ RUN     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65
 RUN	apt update && apt -y install python python-tk python-h5py python-pip ipython \
 	&& pip install --upgrade pip 
 #install scipy numpy pandas matplotlib  #####
-RUN	pip install scipy==0.8 PyCogent==1.5.3 numpy==1.7.1 pandas matplotlib==1.3.1
+RUN	pip install numpy==1.7.1 matplotlib==1.3.1
 #install qiime 
 RUN	pip install qiime
 RUN	apt update && \
@@ -47,7 +47,6 @@ RUN	su - -c \
 RUN	pip install HTseq
 
 #install cufflinks####
-RUN	mkdir /app
 WORKDIR	/app/
 RUN	curl -sL http://cole-trapnell-lab.github.io/cufflinks/assets/downloads/cufflinks-2.2.1.Linux_x86_64.tar.gz | tar -zxC ./; \
 	curl -sL https://software.broadinstitute.org/gatk/download/auth?package=GATK | tar -jxC ./
@@ -70,7 +69,7 @@ RUN	wget http://cbio.mskcc.org/microrna_data/miRanda-aug2010.tar.gz; \
         cd miRanda-3.3a; \
         ./configure; \
         make;\ 
-	echo 'export PATH="/app/miRanda-3.3a" >> /etc/profile' ;\
+	echo 'export PATH="/app/miRanda-3.3a:$PATH" >> /etc/profile' ;\
 	source /etc/profile
 
 #tophat3##############	
