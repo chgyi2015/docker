@@ -4,7 +4,7 @@ COPY    docker-entrypoint.sh /usr/local/bin/
 RUN	yum update ;\
 	yum -y install epel-release ;\
 	yum update; \
-	yum -y install libpng-devel freetype-devel python-pip python34-pip gcc gcc-gfortran gcc-c++ readline-devel;\
+	yum -y install make libpng-devel freetype-devel python-pip python34-pip gcc gcc-gfortran gcc-c++ readline-devel;\
 	yum -y install  libXt-devel bzip2 bzip2-devel bzip2-libs xz-devel.x86_64 zlib-devel zlib-libs pcre-devel libcurl-devel;\
 	pip install --upgrade pip ;\
 	pip install numpy HTseq; \
