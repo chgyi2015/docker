@@ -56,7 +56,7 @@ ENV	PATH /app/cufflinks-2.2.1.Linux_x86_64:$PATH
 #install hisat2 ####
 WORKDIR	/app
 RUN	wget -c ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/downloads/hisat2-2.1.0-Linux_x86_64.zip && unzip hisat2-2.1.0-Linux_x86_64.zip  && \
-        rm -rf hisat2-2.1.0-Linux_x86_64.zip && 
+        rm -rf hisat2-2.1.0-Linux_x86_64.zip  
 ENV	PATH /app/hisat2-2.1.0:$PATH
 
 #install strinttie####
