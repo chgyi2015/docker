@@ -16,9 +16,6 @@ RUN	yum update ;\
         chmod +x /usr/local/bin/docker-entrypoint.sh
 CMD     docker-entrypoint.sh
 
-##install R3.4.2  ###
-RUN     su - -c \
-                "/app/R-3.4.3/bin/R -e \"install.packages('devtools', repos='https://cran.rstudio.com/');library(devtools);devtools::install_github(c('IRkernel/IRdisplay','IRkernel/IRkernel'));IRkernel::installspec();source('http://www.bioconductor.org/biocLite.R');biocLite(c('ballgown','pheatmap','ggplot2','clusterProfiler','limma','reshape2','clusterProfiler','oligo','org.Hs.eg.db','psych','DESeq','baySeq','DEGseq','DESeq2','edgeR','SAMseq','readr','readxl','optparse','AnnotationHub','topGO'))\""
 
 #install cufflinks####
 WORKDIR /app/
@@ -49,3 +46,5 @@ RUN     curl -sL http://cole-trapnell-lab.github.io/cufflinks/assets/downloads/c
         echo 'export PATH="/app/R-3.4.3/bin:$PATH" >> /etc/profile ;\
         source /etc/profile ;\
 	yum autoremove 
+#RUN     su - -c \
+#                "/app/R-3.4.3/bin/R -e \"install.packages('devtools', repos='https://cran.rstudio.com/');library(devtools);devtools::install_github(c('IRkernel/IRdisplay','IRkernel/IRkernel'));IRkernel::installspec();source('http://www.bioconductor.org/biocLite.R');biocLite(c('ballgown','pheatmap','ggplot2','clusterProfiler','limma','reshape2','clusterProfiler','oligo','org.Hs.eg.db','psych','DESeq','baySeq','DEGseq','DESeq2','edgeR','SAMseq','readr','readxl','optparse','AnnotationHub','topGO'))\""
