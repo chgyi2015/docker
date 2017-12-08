@@ -2,9 +2,16 @@ FROM	ubuntu:16.04
 ENV	LANG C.UTF-8
 RUN	echo 'deb http://cran.rstudio.com/bin/linux/ubuntu xenial/' >>/etc/apt/sources.list
 RUN     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
+
+RUN	apt update && apt -y install python python-tk python-h5py python-pip ipython \
+	&& pip install --upgrade pip 
+#install scipy numpy pandas matplotlib  #####
+RUN	pip install scipy numpy pandas matplotlib
+#install qiime 
+
+RUN	pip install qiime
 RUN	apt update && \
-	apt -y install python \
-	               apt-transport-https \
+	apt -y install apt-transport-https \
 		       openssl \
                        wget \
                        curl \
@@ -22,16 +29,9 @@ RUN	apt update && \
 		       openjdk-8-jre \
 		       gcc \
 		       make \
-		       python-tk  \
-		       python-h5py   \
                        libghc-zlib-dev \
                        bzip2	
 RUN	apt update && apt -y install r-base-core
-RUN	apt update && apt -y install python-pip ipython && pip install --upgrade pip 
-#install scipy numpy pandas matplotlib  #####
-RUN	pip install scipy numpy pandas matplotlib
-#install qiime 
-RUN	pip install qiime
 
 #install jupyter and basic module
 RUN	apt update && apt -y install python3 python3-pip  && pip3 install --upgrade pip
