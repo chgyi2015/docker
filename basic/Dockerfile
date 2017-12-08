@@ -1,15 +1,17 @@
 FROM	ubuntu:16.04
 ENV	LANG C.UTF-8
+COPY	sources.list /etc/apt/
 RUN	echo 'deb http://cran.rstudio.com/bin/linux/ubuntu xenial/' >>/etc/apt/sources.list
 RUN     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
 
-RUN	apt update && apt -y install python python-tk python-h5py python-pip ipython \
+RUN	apt update && apt -y install python python-tk python-pip ipython \
 	&& pip install --upgrade pip;\ 
 	pip install numpy==1.7.1 ; \
 	pip install matplotlib==1.3.1 ; \
-        pip install scipy==0.17.1
-#install qiime 
-RUN	pip install qiime
+        pip install scipy==0.17.1 ;\
+	pip install h5py ;\
+	pip install qiime 
+
 RUN	apt update && \
 	apt -y install apt-transport-https \
 		       openssl \
@@ -61,7 +63,6 @@ ENV	PATH /app/hisat2-2.1.0:$PATH
 #install strinttie####
 RUN	curl -sL http://ccb.jhu.edu/software/stringtie/dl/stringtie-1.3.3b.Linux_x86_64.tar.gz | tar -zxC ./ ;\
 	echo 'export PATH="/app/stringtie-1.3.b.Linux_x86_64:$PATH" '>> /etc/profile ;\
-	source /etc/profile
 
 #add miranda soft #
 RUN	wget http://cbio.mskcc.org/microrna_data/miRanda-aug2010.tar.gz; \
@@ -71,11 +72,10 @@ RUN	wget http://cbio.mskcc.org/microrna_data/miRanda-aug2010.tar.gz; \
         ./configure; \
         make;\ 
 	echo 'export PATH="/app/miRanda-3.3a:$PATH" >> /etc/profile' ;\
-	source /etc/profile
 
 #tophat3##############	
 RUN	curl -sL  https://github.com/trinityrnaseq/trinityrnaseq/archive/Trinity-v2.5.1.tar.gz | tar -zxC ./;\
         cd /app/trinityrnaseq-Trinity-v2.5.1; \
         make;\
 	echo 'export PATH="/app/trinityrnaseq-Trinity-v2.5.1:$PATH"' >> /etc/profile ;\
-	source /etc/profile
+	apt update && apt -y install ncbi-blast+;\
