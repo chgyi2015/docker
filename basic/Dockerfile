@@ -4,9 +4,10 @@ RUN	echo 'deb http://cran.rstudio.com/bin/linux/ubuntu xenial/' >>/etc/apt/sourc
 RUN     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
 
 RUN	apt update && apt -y install python python-tk python-h5py python-pip ipython \
-	&& pip install --upgrade pip 
-#install scipy numpy pandas matplotlib  #####
-RUN	pip install numpy==1.7.1 matplotlib==1.3.1
+	&& pip install --upgrade pip;\ 
+	pip install numpy==1.7.1 ; \
+	pip install matplotlib==1.3.1 ; \
+        pip install scipy==0.17.1
 #install qiime 
 RUN	pip install qiime
 RUN	apt update && \
