@@ -23,7 +23,7 @@ ENV	PATH /app/bin:$PATH
 
 RUN     curl -sL http://cole-trapnell-lab.github.io/cufflinks/assets/downloads/cufflinks-2.2.1.Linux_x86_64.tar.gz | tar -zxC ./; \
         curl -sL https://software.broadinstitute.org/gatk/download/auth?package=GATK | tar -jxC ./; \
-	export PATH=/app/cufflinks-2.2.1.Linux_x86_64:$PATH
+	export PATH=/app/cufflinks-2.2.1.Linux_x86_64:$PATH ;\
         wget -c ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/downloads/hisat2-2.1.0-Linux_x86_64.zip ;\
 	unzip hisat2-2.1.0-Linux_x86_64.zip  ;\
         rm -rf hisat2-2.1.0-Linux_x86_64.zip ; \
