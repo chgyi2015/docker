@@ -26,7 +26,7 @@ RUN	apt update && apt -y install python python-tk python-pip ipython ;\
                        bzip2	;\
 	apt -y install r-base-core ;\
 	apt -y install python3 python3-pip  && pip3 install --upgrade pip ;\
-	pip3 install jupyter numpy scipy pandas matplotlib bs4 ;\ 
+	pip3 install jupyter numpy scipy pandas matplotlib bs4  
 
 COPY	docker-entrypoint.sh /usr/local/bin/
 RUN	chmod +x /usr/local/bin/docker-entrypoint.sh
