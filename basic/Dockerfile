@@ -65,6 +65,6 @@ ENV	PATH /app/miRanda-3.3a:$PATH
 #tophat3##############	
 RUN	curl -sL  https://github.com/trinityrnaseq/trinityrnaseq/archive/Trinity-v2.5.1.tar.gz | tar -zxC ./;\
         cd /app/trinityrnaseq-Trinity-v2.5.1; \
-        make;\
+        make
 ENV	PATH /app/trinityrnaseq-Trinity-v2.5.1:$PATH
 RUN	apt update && apt -y install ncbi-blast+; apt autoremove 
