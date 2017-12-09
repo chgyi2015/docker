@@ -8,9 +8,9 @@ RUN 	yum update ; yum -y install epel-release ;yum clean cache ;yum update ;\
                    python34-devel ;\
         pip3 install jupyter numpy scipy pandas matplotlib bs4 ;\
 	    make /app ;mkdir /app/bin/ ;cd /app/; \
-        curl -sL https://mirrors.ustc.edu.cn/CRAN/src/base/R-3/R-3.4.2.tar.gz | tar -zxC ./ ;\
-	    cd R-3.4.2 ; ./configure && make && make install ; \ 
-        cp /app/R-3.4.2/R /app/bin/ ;\
+        curl -sL https://mirrors.ustc.edu.cn/CRAN/src/base/R-3/R-3.4.1.tar.gz | tar -zxC ./ ;\
+	    cd R-3.4.1 ; ./configure && make && make install ; \ 
+        cp /app/R-3.4.1/R /app/bin/ ;\
         chmod +x /usr/local/bin/docker-entrypoint.sh
 CMD     docker-entrypoint.sh
 
