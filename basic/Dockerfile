@@ -50,7 +50,7 @@ RUN	wget -c ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/downloads/hisat2-2.1.0-Lin
 ENV	PATH /app/hisat2-2.1.0:$PATH
 
 #install strinttie####
-RUN	curl -sL http://ccb.jhu.edu/software/stringtie/dl/stringtie-1.3.3b.Linux_x86_64.tar.gz | tar -zxC ./ ;\
+RUN	curl -sL http://ccb.jhu.edu/software/stringtie/dl/stringtie-1.3.3b.Linux_x86_64.tar.gz | tar -zxC ./
 ENV	PATH /app/stringtie0.3.b.Linux_x86_64:$PATH
 
 #add miranda soft #
@@ -59,7 +59,7 @@ RUN	wget http://cbio.mskcc.org/microrna_data/miRanda-aug2010.tar.gz; \
         rm -rf miRanda-aug2010.tar.gz ;\
         cd miRanda-3.3a; \
         ./configure; \
-        make;\ 
+        make 
 ENV	PATH /app/miRanda-3.3a:$PATH
 
 #tophat3##############	
