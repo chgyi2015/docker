@@ -9,7 +9,8 @@ RUN	yum update ;\
 	pip install --upgrade pip ;\
 	pip install numpy HTseq; \
 	pip install qiime ;\
-	mkdir /app ; cd /app ;\
+	mkdir -p /app/bin ; cd /app ;\
+        export PA/app/R-3.4.3/bin:$PATH ;\
 	curl -sL https://mirrors.ustc.edu.cn/CRAN/src/base/R-3/R-3.4.3.tar.gz | tar -zxC ./ ;\
 	cd R-3.4.3 ; ./configure && make && make install ; cp /app/R-3.4.3/R /app/bin/ ;\
         pip3 install jupyter numpy scipy pandas matplotlib bs4 ;\
@@ -46,6 +47,6 @@ RUN     yum update && \
         cd /app/trinityrnaseq-Trinity-v2.5.1; \
         make;\
         cp /app/trinityrnaseq-Trinity-v2.5.1/Trinity /app/bin/  ;\
-	yum autoremove 
+	yum -y autoremove 
 RUN     su - -c \
                 "/app/R-3.4.3/bin/R -e \"install.packages('devtools', repos='https://cran.rstudio.com/');library(devtools);devtools::install_github(c('IRkernel/IRdisplay','IRkernel/IRkernel'));IRkernel::installspec();source('http://www.bioconductor.org/biocLite.R');biocLite(c('ballgown','pheatmap','ggplot2','clusterProfiler','limma','reshape2','clusterProfiler','oligo','org.Hs.eg.db','psych','DESeq','baySeq','DEGseq','DESeq2','edgeR','SAMseq','readr','readxl','optparse','AnnotationHub','topGO'))\""
