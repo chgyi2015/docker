@@ -8,16 +8,13 @@ RUN 	yum update ; yum -y install epel-release ;yum clean cache ;yum update ;\
                    python34-devel ;\
         pip3 install jupyter numpy scipy pandas matplotlib bs4 ;\
 	    make /app ;mkdir /app/bin/ ;cd /app/; \
-        curl -sL https://mirrors.ustc.edu.cn/CRAN/src/base/R-3/R-3.4.1.tar.gz | tar -zxC ./ ;\
-	    cd R-3.4.1 ; ./configure && make && make install ; \ 
-        cp /app/R-3.4.1/R /app/bin/ ;\
+        curl -sL https://mirrors.ustc.edu.cn/CRAN/src/base/R-3/R-3.4.3.tar.gz | tar -zxC ./ ;\
+	    cd R-3.4.3 ; ./configure && make && make install ; \ 
+        cp /app/R-3.4.3/R /app/bin/ ;\
         chmod +x /usr/local/bin/docker-entrypoint.sh
 CMD     docker-entrypoint.sh
-
 ENV	    PATH /app/bin:$PATH
 RUN     yum update ; yum -y install openssl-devel openssl-libs
-RUN     su - -c \
-        "R -e \"install.packages('devtools', repos='https://cran.rstudio.com/');library(devtools);devtools::install_github(c('IRkernel/IRdisplay','IRkernel/IRkernel'));IRkernel::installspec()\""
 WORKDIR  /app/
 EXPOSE   8888 22
 USER     root
@@ -50,4 +47,6 @@ RUN     yum update && \
         cd /app/trinityrnaseq-Trinity-v2.5.1; \
         make;\
         cp /app/trinityrnaseq-Trinity-v2.5.1/Trinity /app/bin/  ;\
+       su - -c \
+               "R -e \"install.packages('devtools', repos='https://cran.rstudio.com/');source('http://www.bioconductor.org/biocLite.R');biocLite(c('ballgown','pheatmap','ggplot2','clusterProfiler','limma','reshape2','clusterProfiler','oligo','org.Hs.eg.db','psych','DESeq','baySeq','DEGseq','DESeq2','edgeR','SAMseq','readr','readxl','optparse','AnnotationHub','topGO'))\""  ;\
 	yum -y autoremove 
