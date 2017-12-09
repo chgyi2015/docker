@@ -1,19 +1,9 @@
 FROM	ubuntu:16.04
 ENV	LANG C.UTF-8
-COPY	sources.list /etc/apt/
 RUN	echo 'deb http://cran.rstudio.com/bin/linux/ubuntu xenial/' >>/etc/apt/sources.list
 RUN     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
-
 RUN	apt update && apt -y install python python-tk python-pip ipython ;\
 	pip install --upgrade pip;\ 
-	pip install numpy==1.7.1 ; \
-	pip install matplotlib==1.3.1 ; \
-        pip install scipy==0.11.0 ;\
-	pip install h5py ;\
-	pip install pandas==0.16.0 ;\
-	pip install qiime 
-
-RUN	apt update && \
 	apt -y install apt-transport-https \
 		       openssl \
                        wget \
@@ -33,12 +23,11 @@ RUN	apt update && \
 		       gcc \
 		       make \
                        libghc-zlib-dev \
-                       bzip2	
-RUN	apt update && apt -y install r-base-core
+                       bzip2	;\
+	apt -y install r-base-core ;\
+	apt -y install python3 python3-pip  && pip3 install --upgrade pip ;\
+	pip3 install jupyter numpy scipy pandas matplotlib bs4 ;\ 
 
-#install jupyter and basic module
-RUN	apt update && apt -y install python3 python3-pip  && pip3 install --upgrade pip
-RUN	pip3 install jupyter numpy scipy pandas matplotlib bs4 
 COPY	docker-entrypoint.sh /usr/local/bin/
 RUN	chmod +x /usr/local/bin/docker-entrypoint.sh
 CMD	docker-entrypoint.sh
@@ -49,7 +38,6 @@ RUN	su - -c \
 
 #install HTseq##
 RUN	pip install HTseq
-
 #install cufflinks####
 WORKDIR	/app/
 RUN	curl -sL http://cole-trapnell-lab.github.io/cufflinks/assets/downloads/cufflinks-2.2.1.Linux_x86_64.tar.gz | tar -zxC ./; \
