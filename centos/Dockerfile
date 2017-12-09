@@ -8,7 +8,7 @@ RUN	yum update ;\
 	pip install --upgrade pip ;\
 	pip install numpy HTseq; \
 	pip install qiime ;\
-	mkdir -p /app/bin ; cd /app ;\
+	mkdir /app; mkdir /app/bin ; cd /app ;\
         export PA/app/R-3.4.3/bin:$PATH ;\
 	curl -sL https://mirrors.ustc.edu.cn/CRAN/src/base/R-3/R-3.4.3.tar.gz | tar -zxC ./ ;\
 	cd R-3.4.3 ; ./configure && make && make install ; cp /app/R-3.4.3/R /app/bin/ ;\
@@ -18,35 +18,36 @@ CMD     docker-entrypoint.sh
 
 
 #install cufflinks####
-WORKDIR /app/
-ENV	PATH /app/bin:$PATH
 
-RUN     yum update && \
-	yum -y installl openssl openssh-server libcurl-devel libssh2-devel openssl-devel libxml2 libxml2-dev ;\
-	curl -sL http://cole-trapnell-lab.github.io/cufflinks/assets/downloads/cufflinks-2.2.1.Linux_x86_64.tar.gz | tar -zxC ./; \
-        curl -sL https://software.broadinstitute.org/gatk/download/auth?package=GATK | tar -jxC ./; \
-	export PATH=/app/cufflinks-2.2.1.Linux_x86_64:$PATH ;\
-        wget -c ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/downloads/hisat2-2.1.0-Linux_x86_64.zip ;\
-	unzip hisat2-2.1.0-Linux_x86_64.zip  ;\
-        rm -rf hisat2-2.1.0-Linux_x86_64.zip ; \
-        cp -R /app/hisat2-2.1.0/hisat2* /app/bin/  ;\
+#WORKDIR /app/
+#ENV	PATH /app/bin:$PATH
+
+#RUN     yum update && \
+#	yum -y installl openssl openssh-server libcurl-devel libssh2-devel openssl-devel libxml2 libxml2-dev ;\
+#	curl -sL http://cole-trapnell-lab.github.io/cufflinks/assets/downloads/cufflinks-2.2.1.Linux_x86_64.tar.gz | tar -zxC ./; \
+#        curl -sL https://software.broadinstitute.org/gatk/download/auth?package=GATK | tar -jxC ./; \
+#	export PATH=/app/cufflinks-2.2.1.Linux_x86_64:$PATH ;\
+#        wget -c ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/downloads/hisat2-2.1.0-Linux_x86_64.zip ;\
+#	unzip hisat2-2.1.0-Linux_x86_64.zip  ;\
+#        rm -rf hisat2-2.1.0-Linux_x86_64.zip ; \
+#        cp -R /app/hisat2-2.1.0/hisat2* /app/bin/  ;\
         #install strinttie####
-        curl -sL http://ccb.jhu.edu/software/stringtie/dl/stringtie-1.3.3b.Linux_x86_64.tar.gz | tar -zxC ./ ;\
-        cp /app/stringtie-1.3.b.Linux_x86_64/stringtie /app/bin/ ;\
-        #add miranda soft #
-	wget http://cbio.mskcc.org/microrna_data/miRanda-aug2010.tar.gz; \
-        tar -zxvf miRanda-aug2010.tar.gz; \
-        rm -rf miRanda-aug2010.tar.gz ;\
-        cd miRanda-3.3a; \
-        ./configure; \
-        make;\
-        cp -R app/miRanda-3.3a/miranda /app/bin/ ;\
-        #tophat3##############  
-        curl -sL  https://github.com/trinityrnaseq/trinityrnaseq/archive/Trinity-v2.5.1.tar.gz | tar -zxC ./;\
-        cd /app/trinityrnaseq-Trinity-v2.5.1; \
-        make;\
-        cp /app/trinityrnaseq-Trinity-v2.5.1/Trinity /app/bin/  ;\
-	yum -y autoremove 
+#        curl -sL http://ccb.jhu.edu/software/stringtie/dl/stringtie-1.3.3b.Linux_x86_64.tar.gz | tar -zxC ./ ;\
+#        cp /app/stringtie-1.3.b.Linux_x86_64/stringtie /app/bin/ ;\
+#        #add miranda soft #
+#	wget http://cbio.mskcc.org/microrna_data/miRanda-aug2010.tar.gz; \
+#        tar -zxvf miRanda-aug2010.tar.gz; \
+#        rm -rf miRanda-aug2010.tar.gz ;\
+#        cd miRanda-3.3a; \
+#        ./configure; \
+#        make;\
+#        cp -R app/miRanda-3.3a/miranda /app/bin/ ;\
+#        #tophat3##############  
+#        curl -sL  https://github.com/trinityrnaseq/trinityrnaseq/archive/Trinity-v2.5.1.tar.gz | tar -zxC ./;\
+#        cd /app/trinityrnaseq-Trinity-v2.5.1; \
+#        make;\
+#        cp /app/trinityrnaseq-Trinity-v2.5.1/Trinity /app/bin/  ;\
+#	yum -y autoremove 
 
 #RUN     yum -y install openssl-devel ;\
 #	su - -c \
