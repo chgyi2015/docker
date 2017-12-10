@@ -7,13 +7,13 @@ RUN 	yum update ; yum -y install epel-release ;yum clean cache ;yum update ;\
                    zlib-devel zlib-libs pcre-devel libcurl-devel python2-pip python34-pip \
                    python34-devel ;\
         pip3 install jupyter numpy scipy pandas matplotlib bs4 ;\
-	    make /app ;mkdir /app/bin/ ;cd /app/; \
+	mkdir /app ;mkdir /app/bin/ ;cd /app/; \
         curl -sL https://mirrors.ustc.edu.cn/CRAN/src/base/R-3/R-3.4.3.tar.gz | tar -zxC ./ ;\
-	    cd R-3.4.3 ; ./configure && make && make install ; \ 
+	cd R-3.4.3 ; ./configure && make && make install ; \ 
         cp /app/R-3.4.3/R /app/bin/ ;\
         chmod +x /usr/local/bin/docker-entrypoint.sh
 CMD     docker-entrypoint.sh
-ENV	    PATH /app/bin:$PATH
+ENV     PATH /app/bin:$PATH
 RUN     yum update ; yum -y install openssl-devel openssl-libs
 WORKDIR  /app/
 EXPOSE   8888 22
