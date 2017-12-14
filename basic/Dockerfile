@@ -6,12 +6,12 @@ RUN	apt update && apt -y install python python-tk python-pip ipython ;\
 	pip install --upgrade pip;\ 
 	apt -y install apt-transport-https \
 		       openssl \
-                       wget \
-                       curl \
-	               openssh-server \
-                       libcurl4-openssl-dev \
-                       libssh2-1-dev	\
-                       libssl-dev \
+               wget \
+               curl \
+	           openssh-server \
+               libcurl4-openssl-dev \
+               libssh2-1-dev	\
+               libssl-dev \
 		       libxml2 \
 		       libxml2-dev \
 		       bowtie2 \
@@ -22,8 +22,8 @@ RUN	apt update && apt -y install python python-tk python-pip ipython ;\
 		       openjdk-8-jre \
 		       gcc \
 		       make \
-                       libghc-zlib-dev \
-                       bzip2	;\
+               libghc-zlib-dev \
+               bzip2	;\
 	apt -y install r-base-core ;\
 	apt -y install python3 python3-pip  && pip3 install --upgrade pip ;\
 	pip3 install jupyter numpy scipy pandas matplotlib bs4  
@@ -60,7 +60,7 @@ RUN	wget http://cbio.mskcc.org/microrna_data/miRanda-aug2010.tar.gz; \
         cd miRanda-3.3a; \
         ./configure; \
         make 
-ENV	PATH /app/miRanda-3.3a:$PATH
+ENV	PATH /app/miRanda-3.3a/src/:$PATH
 
 #tophat3##############	
 RUN	curl -sL  https://github.com/trinityrnaseq/trinityrnaseq/archive/Trinity-v2.5.1.tar.gz | tar -zxC ./;\
