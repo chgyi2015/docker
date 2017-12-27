@@ -25,7 +25,7 @@ RUN	apt update && apt -y install python python-tk python-pip ipython ;\
                libghc-zlib-dev \
                bzip2	;\
 	apt -y install r-base-core ;\
-	apt -y install python3 python3-pip  && pip3 install --upgrade pip ;\
+	apt -y install python3 python3-pip python3-tk && pip3 install --upgrade pip ;\
 	pip3 install jupyter numpy scipy pandas matplotlib bs4  
 
 COPY	docker-entrypoint.sh /usr/local/bin/
@@ -41,7 +41,7 @@ RUN	pip install HTseq
 #install cufflinks####
 WORKDIR	/app/
 RUN	curl -sL http://cole-trapnell-lab.github.io/cufflinks/assets/downloads/cufflinks-2.2.1.Linux_x86_64.tar.gz | tar -zxC ./; \
-	curl -sL https://software.broadinstitute.org/gatk/download/auth?package=GATK | tar -jxC ./
+	curl -sL https://software.broadinstitute.org/gatk/download/auth?package=GATK | tar -jxC ./;
 ENV	PATH /app/cufflinks-2.2.1.Linux_x86_64:$PATH
 #install hisat2 ####
 WORKDIR	/app
@@ -68,3 +68,8 @@ RUN	curl -sL  https://github.com/trinityrnaseq/trinityrnaseq/archive/Trinity-v2.
         make
 ENV	PATH /app/trinityrnaseq-Trinity-v2.5.1:$PATH
 RUN	apt update && apt -y install ncbi-blast+; apt autoremove 
+
+#download picard 2.16.0 
+RUN mkdir -p /app/picard-2.16.0 && cd /app/picard-2.16.0 ;\
+    wget -c https://github.com/broadinstitute/picard/releases/download/2.16.0/picard.jar ;
+    
